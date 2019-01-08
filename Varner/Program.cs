@@ -19,7 +19,7 @@ namespace Varner
                 char c = Console.ReadKey().KeyChar;
                 if (c == '1') YL01();
                 else if (c == '2') YL02();
-                //else if (c == '3') YL03();
+                else if (c == '3') YL03();
                 else break;
             } while (true);
         }
@@ -110,6 +110,11 @@ namespace Varner
                 Console.WriteLine("");
             }
             Console.WriteLine("");
+        }
+
+        static void YL03()
+        {
+
         }
     }
 }
