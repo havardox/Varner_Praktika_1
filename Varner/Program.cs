@@ -16,10 +16,14 @@ namespace Varner
                 Console.WriteLine("1 - Korrutustabel (15x15)");
                 Console.WriteLine("2 - Ülesanne 2");
                 Console.WriteLine("3 - Ülesanne 3");
+                Console.WriteLine("4 - Ülesanne 4");
+                Console.WriteLine("5 - Ülesanne 5");
                 char c = Console.ReadKey().KeyChar;
                 if (c == '1') YL01();
                 else if (c == '2') YL02();
                 else if (c == '3') YL03();
+                else if (c == '4') YL04();
+                else if (c == '5') YL05();
                 else break;
             } while (true);
         }
@@ -114,7 +118,90 @@ namespace Varner
 
         static void YL03()
         {
+            // Formeerida kahemõõtmeline massiiv 15x20 vahemikust [10,50]
+            // Trükkida see massiiv.
+            // Formeerida uus massiiv, kus iga rea arvud on tagurpidi
+            Console.Write("\n\nÜlesanne 3 \n\n");
+            Random rand = new Random();
+            int[,] tab = new int[10, 20];
+            int[,] tab2 = new int[10, 20];
+            int i, j;
+            for (i = 0; i < 10; i++)
+            {
+                for (j = 0; j < 20; j++)
+                {
+                    tab[i, j] = rand.Next(10, 51);
+                }
+            }
+            PrintMatrix(tab);
+            for (i = 0; i < 10; i++)
+            {
+                for (j = 0; j < 20; j++)
+                {
+                   tab2[i, j] = tab[i, tab.GetLength(1) - j - 1];
+                }
+            }
+            PrintMatrix(tab2);
+        }
 
+        static void YL04()
+        {
+            int number;
+            double S;
+            S = 0;
+            number = (int) InputInteger();
+            Console.Write("S = ");
+            for (int i=1; i<=number; i++)
+            {
+                if (i == 1) {
+                    S += i + i;
+                }
+                else
+                {
+                    S /= i + i;
+                }
+                Console.Write("{0} + {0}", i);
+                if (i != number)
+                {
+                    Console.Write(" / ");
+                }
+            }
+            S += (number - 1) / number;
+            Console.Write(" + ({0} - 1) / {0} = {1}\n\n", number, S);
+        }
+
+        static double InputInteger()
+        {
+            int input;
+            while (true)
+            {
+                Console.Write("\nSisestage täisarv: ");
+                if (!int.TryParse(Console.ReadLine(), out input))
+                {
+                    Console.WriteLine("Ei ole täisarv");
+                }
+                else
+                {
+                    return input;
+                }
+            }
+        }
+
+        static void YL05()
+        {
+            int number, cellValue;
+            number = (int) InputInteger();
+            int[,] tab = new int[number, number];
+            for (int i = 0; i < number; i++)
+            {
+                cellValue = 1;
+                for (int j = 0; j < number; j++)
+                {
+                    tab[i, j] = cellValue;
+                    cellValue += 2;
+                }
+            }
+            PrintMatrix(tab);
         }
     }
 }
