@@ -18,12 +18,14 @@ namespace Varner
                 Console.WriteLine("3 - Ülesanne 3");
                 Console.WriteLine("4 - Ülesanne 4");
                 Console.WriteLine("5 - Ülesanne 5");
+                Console.WriteLine("6 - Ülesanne 6");
                 char c = Console.ReadKey().KeyChar;
                 if (c == '1') YL01();
                 else if (c == '2') YL02();
                 else if (c == '3') YL03();
                 else if (c == '4') YL04();
                 else if (c == '5') YL05();
+                else if (c == '6') YL06();
                 else break;
             } while (true);
         }
@@ -202,6 +204,32 @@ namespace Varner
                 }
             }
             PrintMatrix(tab);
+        }
+
+        static void YL06()
+        {
+            string sentence;
+            char previousCharacter = ' ';
+            int wordCount = 0;
+            Console.WriteLine("\nSisestage lasue:");
+            sentence = Console.ReadLine();
+            for(int i = 0; i < (sentence.Length - 1); i++)
+            {
+                if (i != 0)
+                {
+                    if (sentence[i] != ' ')
+                    {
+                        if (previousCharacter == ' ')
+                        {
+                            wordCount += 1;
+                            Console.WriteLine(sentence[i]);
+                        }
+                    }
+
+                    previousCharacter = sentence[i];
+                }
+            }
+            Console.WriteLine("Sõnad: {0}", wordCount);
         }
     }
 }
