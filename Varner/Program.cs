@@ -152,6 +152,7 @@ namespace Varner
 
         static void YL04()
         {
+            Console.Write("\n\nÜlesanne 4 \n\n");
             int number;
             double S;
             S = 0;
@@ -195,6 +196,7 @@ namespace Varner
 
         static void YL05()
         {
+            Console.Write("\n\nÜlesanne 5 \n\n");
             int number, cellValue;
             number = (int) InputInteger();
             int[,] tab = new int[number, number];
@@ -212,95 +214,105 @@ namespace Varner
 
         static void YL06()
         {
-            string sentence;
-            char previousCharacter = ' ';
-            int wordCount = 0;
-            Console.WriteLine("\nSisestage lasue:");
-            sentence = Console.ReadLine();
-            for(int i = 0; i < (sentence.Length - 1); i++)
-            {
-                if (i != 0)
-                {
-                    if (sentence[i] != ' ')
-                    {
-                        if (previousCharacter == ' ')
-                        {
-                            wordCount += 1;
-                            Console.WriteLine(sentence[i]);
-                        }
-                    }
+            Console.Write("\n\nÜlesanne 6 \n\n");
+            int wordCount;
+            Console.WriteLine("Sisestage lause:");
+            wordCount = countWords(Console.ReadLine());
+            Console.WriteLine("Sõnade arv on " + wordCount);
+        }
 
-                    previousCharacter = sentence[i];
+        static int countWords(string str)
+        {
+            int wordCount = 0;
+            for (int i = 1; i < str.Length; i++)
+            {
+                if (str[i - 1] == ' ' && str[i] != ' ')
+                {
+                    wordCount++;
                 }
             }
-            Console.WriteLine("Sõnad: {0}", wordCount);
+            return wordCount;
         }
 
         static void YL07()
         {
+            Console.Write("\n\nÜlesanne 7 \n\n");
+            string str, currentWord;
+            char currentChar, previousChar;
+            bool newWord;
+            int i, wordCount, wordIndex;
             string[] words;
-            Console.WriteLine("\nSisestage lasue:");
-            words = wordsToArray(Console.ReadLine());
-            Console.Write("[");
-            for (int i = 0; i < words.Length; i++)
+            Console.WriteLine("Sisestage lause:");
+            str = Console.ReadLine();
+            str = " " + str + " ";
+            wordCount = countWords(str);
+            words = new string[wordCount];
+            wordIndex = 0;
+            newWord = false;
+            currentWord = "";
+            for (i = 1; i < str.Length; i++)
             {
-                Console.Write("{0}",words[i]);
-                if (i != (words.Length - 1))
+                currentChar = str[i];
+                previousChar = str[i - 1];
+                if (previousChar == ' ' && currentChar != ' ')
                 {
-                    Console.Write(", ");
-                }
-            }
-            Console.Write("]\n\n");
-        }
-
-        static string[] wordsToArray(string str)
-        {
-            int i, j, k;
-            string[] words;
-            bool newWord = false;
-            List<int> wordBoundries = new List<int>();
-            for (i = 0; i < str.Length; i++)
-            {
-                if (newWord == false)
-                {
-                    if (str[i] != ' ')
+                    if (newWord)
+                    {
+                        Console.WriteLine(wordIndex);
+                        newWord = false;
+                        wordIndex++;
+                        words[wordIndex] = currentWord;
+                        currentWord = "";
+                    }
+                    else
                     {
                         newWord = true;
-                        wordBoundries.Add(i);
                     }
-
                 }
-                else
+                if (newWord)
                 {
-                    if (str[i] == ' ')
-                    {
-                        newWord = false;
-                        wordBoundries.Add(i - 1);
-                    }
-                    else if (i == (str.Length - 1))
-                    {
-                        wordBoundries.Add(i);
-                    }
+                    currentWord += currentChar;
                 }
             }
-            words = new string[wordBoundries.Count / 2];
-            k = 0;
-            for (i = 0; i < wordBoundries.Count; i += 2)
+            foreach (string word in words)
             {
-                for (j = wordBoundries[i]; j <= wordBoundries[i + 1]; j++)
-                {
-                    words[k] += str[j];
-                }
-                k++;
+                Console.WriteLine(word);
             }
-            return words;
         }
+
+        //static List<string> wordsToList(string str)
+        //{
+        //    int i, j, k;
+        //    List<string> words = new List<string>();
+        //    string word = "";
+        //    char nextChar;
+        //    for (i = 0; i < (str.Length - 1); i++)
+        //    {
+        //        nextChar = str[i + 1];
+        //        if (nextChar != ' ' && str[i] == ' ' || i == 0)
+        //        {
+        //            while (true)
+        //            {
+        //                nextChar = str[i + 1];
+        //                word += str[i];
+        //                i++;
+        //                if (nextChar == ' ' || i == (str.Length - 1))
+        //                {
+        //                    break;
+        //                }
+
+        //            }
+        //            words.Add(word);
+        //        }
+        //    }
+        //    return words;
+        //}
 
         static void YL08()
         {
-            string[] words;
-            Console.WriteLine("\nSisestage lasue:");
-            words = wordsToArray(Console.ReadLine());
+            //string[] words;
+            //Console.WriteLine("\nSisestage lasue:");
+            //words = wordsToArray(Console.ReadLine());
         }
     }
 }
