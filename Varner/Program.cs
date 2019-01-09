@@ -19,6 +19,8 @@ namespace Varner
                 Console.WriteLine("4 - Ülesanne 4");
                 Console.WriteLine("5 - Ülesanne 5");
                 Console.WriteLine("6 - Ülesanne 6");
+                Console.WriteLine("7 - Ülesanne 7");
+                Console.WriteLine("8 - Ülesanne 8");
                 char c = Console.ReadKey().KeyChar;
                 if (c == '1') YL01();
                 else if (c == '2') YL02();
@@ -26,6 +28,8 @@ namespace Varner
                 else if (c == '4') YL04();
                 else if (c == '5') YL05();
                 else if (c == '6') YL06();
+                else if (c == '7') YL07();
+                else if (c == '8') YL08();
                 else break;
             } while (true);
         }
@@ -230,6 +234,73 @@ namespace Varner
                 }
             }
             Console.WriteLine("Sõnad: {0}", wordCount);
+        }
+
+        static void YL07()
+        {
+            string[] words;
+            Console.WriteLine("\nSisestage lasue:");
+            words = wordsToArray(Console.ReadLine());
+            Console.Write("[");
+            for (int i = 0; i < words.Length; i++)
+            {
+                Console.Write("{0}",words[i]);
+                if (i != (words.Length - 1))
+                {
+                    Console.Write(", ");
+                }
+            }
+            Console.Write("]\n\n");
+        }
+
+        static string[] wordsToArray(string str)
+        {
+            int i, j, k;
+            string[] words;
+            bool newWord = false;
+            List<int> wordBoundries = new List<int>();
+            for (i = 0; i < str.Length; i++)
+            {
+                if (newWord == false)
+                {
+                    if (str[i] != ' ')
+                    {
+                        newWord = true;
+                        wordBoundries.Add(i);
+                    }
+
+                }
+                else
+                {
+                    if (str[i] == ' ')
+                    {
+                        newWord = false;
+                        wordBoundries.Add(i - 1);
+                    }
+                    else if (i == (str.Length - 1))
+                    {
+                        wordBoundries.Add(i);
+                    }
+                }
+            }
+            words = new string[wordBoundries.Count / 2];
+            k = 0;
+            for (i = 0; i < wordBoundries.Count; i += 2)
+            {
+                for (j = wordBoundries[i]; j <= wordBoundries[i + 1]; j++)
+                {
+                    words[k] += str[j];
+                }
+                k++;
+            }
+            return words;
+        }
+
+        static void YL08()
+        {
+            string[] words;
+            Console.WriteLine("\nSisestage lasue:");
+            words = wordsToArray(Console.ReadLine());
         }
     }
 }
