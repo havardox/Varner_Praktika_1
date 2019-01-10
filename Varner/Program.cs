@@ -1,109 +1,71 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Varner
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             do
             {
-                Console.WriteLine("Vajuta ülesande number:");
-                Console.WriteLine("1 - Korrutustabel (15x15)");
-                Console.WriteLine("2 - Ülesanne 2");
-                Console.WriteLine("3 - Ülesanne 3");
-                Console.WriteLine("4 - Ülesanne 4");
-                Console.WriteLine("5 - Ülesanne 5");
-                Console.WriteLine("6 - Ülesanne 6");
-                Console.WriteLine("7 - Ülesanne 7");
-                Console.WriteLine("8 - Ülesanne 8");
+                Console.Write("Vajuta ülesande number:\n");
+                Console.Write("1 - Korrutustabel (15x15)\n");
+                Console.Write("2 - Ülesanne 2\n");
+                Console.Write("3 - Ülesanne 3\n");
+                Console.Write("4 - Ülesanne 4\n");
+                Console.Write("5 - Ülesanne 5\n");
+                Console.Write("6 - Ülesanne 6\n");
+                Console.Write("7 - Ülesanne 7\n");
                 char c = Console.ReadKey().KeyChar;
-                if (c == '1') YL01();
-                else if (c == '2') YL02();
-                else if (c == '3') YL03();
-                else if (c == '4') YL04();
-                else if (c == '5') YL05();
-                else if (c == '6') YL06();
-                else if (c == '7') YL07();
-                else if (c == '8') YL08();
-                else break;
-            } while (true);
+                if (c == '1')
+                {
+                    YL01();
+                }
+                else if (c == '2')
+                {
+                    YL02();
+                }
+                else if (c == '3')
+                {
+                    YL03();
+                }
+                else if (c == '4')
+                {
+                    YL04();
+                }
+                else if (c == '5')
+                {
+                    YL05();
+                }
+                else if (c == '6')
+                {
+                    YL06();
+                }
+                else if (c == '7')
+                {
+                    YL07();
+                }
+                else
+                {
+                    break;
+                }
+            }
+            while (true);
         }
 
         static void YL01()
         {
-            Console.Write("\n\nKorrutustabel (15x15) \n\n");
-
+            Console.Write("\n\n Korrutustabel (15x15) \n\n");
             int[,] tab = new int[16, 16];
-
             for (int i = 0; i < 16; i++)
             {
                 for (int j = 0; j < 16; j++)
                 {
                     tab[i, j] = i * j;
-                    Console.Write("{0,4}",tab[i, j]);
                 }
-                Console.WriteLine();
-            }
-        }
-
-        static void YL02()
-        {
-            Console.Write("\n\nÜlesanne 2 \n\n");
-            // Formeerida kahemõõtmeline massiiv 10x10
-            // juhuarvudest vahemikust [10,99]
-            // Diagonaalid on 0
-            // ja leida selle massiivi maksimaalsete arvude asukohad.
-            Random rand = new Random();
-            int[,] tab = new int[10,10];
-            int i, j;
-            for (i = 0; i < 10; i++)
-            {
-                for (j = 0; j < 10; j++)
-                {
-                    tab[i, j] = rand.Next(10, 100);
-                }
-                tab[i, i] = 0;
-                tab[i, tab.GetLength(1) - 1 - i] = 0;
             }
 
             PrintMatrix(tab);
-
-            int max = tab[0, 0];
-            for (i = 0; i < 10; i++)
-            {
-                for (j = 0; j < 10; j++)
-                {
-                    if (tab[i, j] > max)
-                    {
-                        max = tab[i, j];
-                    }
-                }
-            }
-            for (i = 0; i < 10; i++)
-            {
-                for (j = 0; j < 10; j++)
-                {
-                    Console.Write("{0,4}", tab[i, j]);
-                }
-                Console.WriteLine("");
-                for (j = 0; j < 10; j++)
-                {
-                    if (tab[i,j] == max)
-                    {
-                        Console.Write("  --");
-                    }
-                    else
-                    {
-                        Console.Write("    ");
-                    }
-                }
-                Console.WriteLine("");
-            }
         }
 
         static void PrintMatrix(int[,] arr)
@@ -117,9 +79,60 @@ namespace Varner
                 {
                     Console.Write("{0,4}", arr[i, j]);
                 }
-                Console.WriteLine("");
+
+                Console.Write("\n");
             }
-            Console.WriteLine("");
+
+            Console.Write("\n");
+        }
+
+        static void YL02()
+        {
+            // Formeerida kahemõõtmeline massiiv 10x10
+            // juhuarvudest vahemikust [10,99]
+            // Diagonaalid on 0
+            // ja leida selle massiivi maksimaalsete arvude asukohad.
+            Console.Write("\n\n Ülesanne 2 \n\n");
+            int[,] tab = new int[10, 10];
+            Random rand = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    tab[i, j] = rand.Next(10, 100);
+                }
+
+                tab[i, i] = 0;
+                tab[i, tab.GetLength(1) - 1 - i] = 0;
+            }
+
+            int max = tab[0, 0];
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    if (tab[i, j] > max)
+                    {
+                        max = tab[i, j];
+                    }
+                }
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    Console.Write("{0,4}", tab[i, j]);
+                }
+                
+                Console.Write("\n");
+                for (int j = 0; j < 10; j++)
+                {
+                    Console.Write(tab[i, j] == max ? "  --" : "    ");
+                }
+
+                Console.Write("\n");
+            }
         }
 
         static void YL03()
@@ -127,65 +140,57 @@ namespace Varner
             // Formeerida kahemõõtmeline massiiv 15x20 vahemikust [10,50]
             // Trükkida see massiiv.
             // Formeerida uus massiiv, kus iga rea arvud on tagurpidi
-            Console.Write("\n\nÜlesanne 3 \n\n");
+            Console.Write("\n\n Ülesanne 3 \n\n");
             Random rand = new Random();
             int[,] tab = new int[10, 20];
-            int[,] tab2 = new int[10, 20];
-            int i, j;
-            for (i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
-                for (j = 0; j < 20; j++)
+                for (int j = 0; j < 20; j++)
                 {
                     tab[i, j] = rand.Next(10, 51);
                 }
             }
+
             PrintMatrix(tab);
-            for (i = 0; i < 10; i++)
+            int[,] tab2 = new int[10, 20];
+            for (int i = 0; i < 10; i++)
             {
-                for (j = 0; j < 20; j++)
+                for (int j = 0; j < 20; j++)
                 {
                    tab2[i, j] = tab[i, tab.GetLength(1) - j - 1];
                 }
             }
+
             PrintMatrix(tab2);
         }
 
         static void YL04()
         {
-            Console.Write("\n\nÜlesanne 4 \n\n");
-            int number;
-            double S;
-            S = 0;
-            number = (int) InputInteger();
-            Console.Write("S = ");
-            for (int i=1; i<=number; i++)
+            Console.Write("\n\n Ülesanne 4 \n\n");
+            int number = InputInteger();
+            double result = 0;
+            for (int i = 1; i <= number; i++)
             {
-                if (i == 1) {
-                    S += i + i;
-                }
-                else
-                {
-                    S /= i + i;
-                }
+                result = (i == 1 ? result + i + i : result / (i + i));
                 Console.Write("{0} + {0}", i);
                 if (i != number)
                 {
                     Console.Write(" / ");
                 }
             }
-            S += (number - 1) / number;
-            Console.Write(" + ({0} - 1) / {0} = {1}\n\n", number, S);
+
+            result += (number - 1) / (float)number;
+            Console.Write(" + ({0} - 1) / {0} = {1}\n\n", number, result);
         }
 
-        static double InputInteger()
+        static int InputInteger()
         {
-            int input;
             while (true)
             {
-                Console.Write("\nSisestage täisarv: ");
-                if (!int.TryParse(Console.ReadLine(), out input))
+                Console.Write("Sisesta täisarv: ");
+                if (!int.TryParse(Console.ReadLine(), out int input))
                 {
-                    Console.WriteLine("Ei ole täisarv");
+                    Console.Write("Ei ole täisarv\n");
                 }
                 else
                 {
@@ -196,33 +201,29 @@ namespace Varner
 
         static void YL05()
         {
-            Console.Write("\n\nÜlesanne 5 \n\n");
-            int number, cellValue;
-            number = (int) InputInteger();
+            Console.Write("\n\n Ülesanne 5 \n\n");
+            int number = InputInteger();
             int[,] tab = new int[number, number];
             for (int i = 0; i < number; i++)
             {
-                cellValue = 1;
+                int cellValue = 1;
                 for (int j = 0; j < number; j++)
                 {
                     tab[i, j] = cellValue;
                     cellValue += 2;
                 }
             }
+
+            Console.Write("\n");
             PrintMatrix(tab);
         }
 
         static void YL06()
         {
-            Console.Write("\n\nÜlesanne 6 \n\n");
-            int wordCount;
-            Console.WriteLine("Sisestage lause:");
-            wordCount = countWords(Console.ReadLine());
-            Console.WriteLine("Sõnade arv on " + wordCount);
-        }
-
-        static int countWords(string str)
-        {
+            Console.Write("\n\n Ülesanne 6 \n\n");
+            Console.Write("Sisesta lause:\n");
+            string str = Console.ReadLine();
+            str = " " + str + " ";
             int wordCount = 0;
             for (int i = 1; i < str.Length; i++)
             {
@@ -231,88 +232,84 @@ namespace Varner
                     wordCount++;
                 }
             }
-            return wordCount;
+
+            Console.Write("\nSõnade arv on " + wordCount + "\n\n");
+            Console.Write("[");
+            str += "*";
+            string[] words = new string[wordCount];
+            int k = 0;
+            int l = 0;
+            while (true)
+            {
+                while (str[l] == ' ')
+                {
+                    l++;
+                }
+
+                if (l == (str.Length - 1))
+                {
+                    Console.Write("]\n\n");
+                    break;
+                }
+
+                if (k != 0)
+                {
+                    Console.Write(", ");
+                }
+
+                while (str[l] != ' ')
+                {
+                    words[k] += str[l];
+                    l++;
+                }
+
+                Console.Write(words[k]);
+                k++;
+            }
+
+            for (int i = 0; i < (wordCount - 1); i++)
+            {
+                for (int j = i + 1; j < wordCount; j++)
+                {
+                    if (words[j].Length < words[i].Length)
+                    {
+                        string temp = words[i];
+                        words[i] = words[j];
+                        words[j] = temp;
+                    }
+                }
+            }
+
+            string newText = string.Empty;
+            for (int i = 0; i < wordCount; i++)
+            {
+                newText += words[i] + " ";
+            }
+
+            Console.Write(newText + "\n\n");
         }
 
         static void YL07()
         {
-            Console.Write("\n\nÜlesanne 7 \n\n");
-            string str, currentWord;
-            char currentChar, previousChar;
-            bool newWord;
-            int i, wordCount, wordIndex;
-            string[] words;
-            Console.WriteLine("Sisestage lause:");
-            str = Console.ReadLine();
-            str = " " + str + " ";
-            wordCount = countWords(str);
-            words = new string[wordCount];
-            wordIndex = 0;
-            newWord = false;
-            currentWord = "";
-            for (i = 1; i < str.Length; i++)
+            Console.Write("\n\n BIN TO DEC \n\n");
+            Console.Write("Sisesta kahendarv: ");
+            string text = Console.ReadLine();
+            int decNumber = 0;
+            int weight = 1;
+            for (int i = text.Length - 1; i >= 0; i--)
             {
-                currentChar = str[i];
-                previousChar = str[i - 1];
-                if (previousChar == ' ' && currentChar != ' ')
-                {
-                    if (newWord)
-                    {
-                        Console.WriteLine(wordIndex);
-                        newWord = false;
-                        wordIndex++;
-                        words[wordIndex] = currentWord;
-                        currentWord = "";
-                    }
-                    else
-                    {
-                        newWord = true;
-                    }
-                }
-                if (newWord)
-                {
-                    currentWord += currentChar;
-                }
+                int binNumber = text[i] - '0';
+                Console.WriteLine(binNumber);
+                decNumber += decNumber * 2 + binNumber;
             }
-            foreach (string word in words)
-            {
-                Console.WriteLine(word);
-            }
+
+            Console.Write("\nKümnendarv = {0}\n\n", decNumber);
         }
-
-        //static List<string> wordsToList(string str)
-        //{
-        //    int i, j, k;
-        //    List<string> words = new List<string>();
-        //    string word = "";
-        //    char nextChar;
-        //    for (i = 0; i < (str.Length - 1); i++)
-        //    {
-        //        nextChar = str[i + 1];
-        //        if (nextChar != ' ' && str[i] == ' ' || i == 0)
-        //        {
-        //            while (true)
-        //            {
-        //                nextChar = str[i + 1];
-        //                word += str[i];
-        //                i++;
-        //                if (nextChar == ' ' || i == (str.Length - 1))
-        //                {
-        //                    break;
-        //                }
-
-        //            }
-        //            words.Add(word);
-        //        }
-        //    }
-        //    return words;
-        //}
 
         static void YL08()
         {
-            //string[] words;
-            //Console.WriteLine("\nSisestage lasue:");
-            //words = wordsToArray(Console.ReadLine());
+            Console.Write("\n\n HEX TO DEC \n\n");
+            Console.Write("Sisesta kahendarv: ");
         }
     }
 }
