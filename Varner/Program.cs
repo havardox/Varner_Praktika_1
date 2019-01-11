@@ -408,6 +408,7 @@ namespace Varner
                 {
                     c = (char)('A' + i - 10);
                 }
+
                 hexNumber = c + hexNumber;
                 decNumber /= 16;
             } while (decNumber > 0);
