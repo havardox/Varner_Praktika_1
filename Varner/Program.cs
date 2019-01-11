@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Varner
 {
@@ -16,34 +17,49 @@ namespace Varner
                 Console.Write("5 - Ülesanne 5\n");
                 Console.Write("6 - Ülesanne 6\n");
                 Console.Write("7 - Ülesanne 7\n");
-                char c = Console.ReadKey().KeyChar;
-                if (c == '1')
+                Console.Write("8 - Ülesanne 8\n");
+                Console.Write("9 - Ülesanne 9\n");
+                Console.Write("10 - Ülesanne 10\n");
+                string input = Console.ReadLine();
+                if (input == "1")
                 {
                     YL01();
                 }
-                else if (c == '2')
+                else if (input == "2")
                 {
                     YL02();
                 }
-                else if (c == '3')
+                else if (input == "3")
                 {
                     YL03();
                 }
-                else if (c == '4')
+                else if (input == "4")
                 {
                     YL04();
                 }
-                else if (c == '5')
+                else if (input == "5")
                 {
                     YL05();
                 }
-                else if (c == '6')
+                else if (input == "6")
                 {
                     YL06();
                 }
-                else if (c == '7')
+                else if (input == "7")
                 {
                     YL07();
+                }
+                else if (input == "8")
+                {
+                    YL08();
+                }
+                else if (input == "9")
+                {
+                    YL09();
+                }
+                else if (input == "10")
+                {
+                    YL10();
                 }
                 else
                 {
@@ -128,7 +144,14 @@ namespace Varner
                 Console.Write("\n");
                 for (int j = 0; j < 10; j++)
                 {
-                    Console.Write(tab[i, j] == max ? "  --" : "    ");
+                    if (tab[i, j] == max )
+                    {
+                        Console.Write("  --");
+                    }
+                    else
+                    {
+                        Console.Write("    ");
+                    }
                 }
 
                 Console.Write("\n");
@@ -167,11 +190,19 @@ namespace Varner
         static void YL04()
         {
             Console.Write("\n\n Ülesanne 4 \n\n");
-            int number = InputInteger();
+            int number = InputInteger("Sisesta täisarv: ");
             double result = 0;
             for (int i = 1; i <= number; i++)
             {
-                result = (i == 1 ? result + i + i : result / (i + i));
+                if (i == 1)
+                {
+                    result += i * 2;
+                }
+                else 
+                {
+                    result /= i + i;
+                }
+
                 Console.Write("{0} + {0}", i);
                 if (i != number)
                 {
@@ -183,11 +214,11 @@ namespace Varner
             Console.Write(" + ({0} - 1) / {0} = {1}\n\n", number, result);
         }
 
-        static int InputInteger()
+        static int InputInteger(string text)
         {
             while (true)
             {
-                Console.Write("Sisesta täisarv: ");
+                Console.Write(text);
                 if (!int.TryParse(Console.ReadLine(), out int input))
                 {
                     Console.Write("Ei ole täisarv\n");
@@ -202,7 +233,7 @@ namespace Varner
         static void YL05()
         {
             Console.Write("\n\n Ülesanne 5 \n\n");
-            int number = InputInteger();
+            int number = InputInteger("Sisesta täisarv: ");
             int[,] tab = new int[number, number];
             for (int i = 0; i < number; i++)
             {
@@ -295,12 +326,11 @@ namespace Varner
             Console.Write("Sisesta kahendarv: ");
             string text = Console.ReadLine();
             int decNumber = 0;
-            int weight = 1;
             for (int i = text.Length - 1; i >= 0; i--)
             {
-                int binNumber = text[i] - '0';
-                Console.WriteLine(binNumber);
-                decNumber += decNumber * 2 + binNumber;
+                int binDigit = text[i] - '0';
+
+                decNumber += decNumber * 2 + binDigit;
             }
 
             Console.Write("\nKümnendarv = {0}\n\n", decNumber);
@@ -309,7 +339,80 @@ namespace Varner
         static void YL08()
         {
             Console.Write("\n\n HEX TO DEC \n\n");
-            Console.Write("Sisesta kahendarv: ");
+            Console.Write("Sisesta 16-arv: ");
+            string text = Console.ReadLine();
+            int decNumber = 0, hexDigit = 0;
+            bool error = false;
+            for (int i = 0; i < text.Length; i++)
+            {
+                char c = text[i];
+                if (c >= '0' && c <= '9')
+                {
+                    hexDigit = c - '0';
+                }
+                else if (c >= 'A' && c <= 'F')
+                {
+                    hexDigit = c - 'A' + 10;
+                }
+                else if (c >= 'a' && c <= 'f')
+                {
+                    hexDigit = c - 'a' + 10;
+                }
+                else
+                {
+                    error = true;
+                }
+
+                decNumber = decNumber * 16 + hexDigit;
+            }
+
+            if (error)
+            {
+                Console.Write("\nViga\n\n");
+            }
+            else
+            {
+                Console.Write("\nKümnendarv = {0}\n\n", decNumber);
+            }
+        }
+
+        static void YL09()
+        {
+            Console.Write("\n\n DEC TO OCT\n\n");
+            int decNumber = InputInteger("Sisesta kümnendarv: ");
+            string octNumber = "";
+            do
+            {
+                string c = (decNumber % 8).ToString();
+                octNumber = c + octNumber;
+                decNumber /= 8;
+            } while (decNumber > 0);
+
+            Console.Write("\nOCT arv = {0}\n\n", octNumber);
+        }
+
+        static void YL10()
+        {
+            Console.Write("\n\n DEC TO OCT\n\n");
+            int decNumber = InputInteger("Sisesta kümnendarv: ");
+            string hexNumber = "";
+            char c;
+            do
+            {
+                int i = decNumber % 16;
+                if (i < 10)
+                {
+                    c = (char)('0' + i);
+                }
+                else
+                {
+                    c = (char)('A' + i - 10);
+                }
+                hexNumber = c + hexNumber;
+                decNumber /= 16;
+            } while (decNumber > 0);
+
+            Console.Write("\nOCT arv = {0}\n\n", hexNumber);
         }
     }
 }
